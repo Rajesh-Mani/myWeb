@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:tx="http://www.springframework.org/schema/tx" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:p="http://www.springframework.org/schema/p" 
+    xmlns:util="http://www.springframework.org/schema/util" 
+    xmlns:cache="http://www.springframework.org/schema/cache"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd		
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd 
+       http://www.springframework.org/schema/util 
+       http://www.springframework.org/schema/util/spring-util.xsd 
+       http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd
+	   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd ">
+    
+    <!-- Detects annotations like @Component, @Service, @Controller, @Repository, @Configuration -->
+    <context:component-scan base-package="au.com.rajesh.*"/>
+
+    <!-- Detects MVC annotations like @RequestMapping -->
+    <mvc:annotation-driven/>   
+   <!-- 
+   <mvc:interceptors>
+      <bean class="au.com.rajesh.interceptors.LoggingInterceptor" />
+    </mvc:interceptors> 
+        
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+   -->     
+   
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <!-- <property name="suffix" value=".html"/> -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    
+    <mvc:default-servlet-handler/>
+    
+	<bean id="secureDataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521/XE" />
+		<property name="username" value="rajesh" />
+		<property name="password" value="rajesh" />
+	</bean>
+	
+</beans>
